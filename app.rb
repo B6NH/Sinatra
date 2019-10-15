@@ -23,3 +23,16 @@ get '/posts' do
   @posts = Post.all(:order => [ :id.desc ], :limit => 20)
   erb :posts
 end
+
+get '/posts/new' do
+  erb :posts_new
+end
+
+post '/posts' do
+  Post.create(
+    :title      => params[:title],
+    :body       => params[:body],
+    :created_at => Time.now
+  )
+  redirect '/posts'
+end
