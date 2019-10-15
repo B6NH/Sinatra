@@ -18,3 +18,8 @@ Post.auto_upgrade!
 get '/' do
   erb :index
 end
+
+get '/posts' do
+  @posts = Post.all(:order => [ :id.desc ], :limit => 20)
+  erb :posts
+end
