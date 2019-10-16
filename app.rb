@@ -46,3 +46,9 @@ post '/posts' do
   )
   redirect '/posts'
 end
+
+post '/posts/:id' do
+  post = Post.get(params[:id])
+  post.update(title:params[:title],body:params[:body])
+  redirect '/posts'
+end
