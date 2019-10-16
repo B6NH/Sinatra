@@ -2,7 +2,12 @@
 
 <a href="/posts/new">Create Post</a>
 
+<ul>
 <% @posts.each do |post| %>
-    <h3><%= post.title %></h3>
-    <p><%= post.body %></p>
+    <li>
+      <%= post.title %> -
+      <%= post.body %> -
+      <a href="/posts/<%= post.id %>">Show</a>
+    </li>
 <% end %>
+</ul>
