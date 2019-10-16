@@ -33,6 +33,11 @@ get '/posts/:id' do
   erb :posts_show
 end
 
+get '/posts/:id/edit' do
+  @post = Post.get(params[:id])
+  erb :posts_edit
+end
+
 post '/posts' do
   Post.create(
     :title      => params[:title],
