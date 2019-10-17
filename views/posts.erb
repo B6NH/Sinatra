@@ -8,7 +8,11 @@
       <%= post.title %> -
       <%= post.body %> -
       <a href="/posts/<%= post.id %>">Show</a> -
-      <a href="/posts/<%= post.id %>/edit">Edit</a>
+      <a href="/posts/<%= post.id %>/edit">Edit</a> -
+      <form action="/posts/<%= post.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type ="submit" value="Destroy">
+      </form>
     </li>
 <% end %>
 </ul>

@@ -52,3 +52,9 @@ put '/posts/:id' do
   post.update(title:params[:title],body:params[:body])
   redirect '/posts'
 end
+
+delete '/posts/:id' do
+  post = Post.get(params[:id])
+  post.destroy
+  redirect '/posts'
+end
