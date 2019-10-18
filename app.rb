@@ -12,8 +12,16 @@ class Post
     property :created_at, DateTime
 end
 
+class Comment
+  include DataMapper::Resource
+
+  property :id,         Serial
+  property :posted_by,  String
+  property :body,       Text
+end
+
 DataMapper.finalize
-Post.auto_upgrade!
+DataMapper.auto_upgrade!
 
 get '/' do
   erb :index
