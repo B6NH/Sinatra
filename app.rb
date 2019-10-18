@@ -70,3 +70,12 @@ delete '/posts/:id' do
   post.destroy
   redirect '/posts'
 end
+
+post '/posts/:id/comments' do
+  post = Post.get(params[:id])
+  post.comments.create(
+    :posted_by  => params[:posted_by],
+    :body       => params[:body]
+  )
+  redirect "/posts/#{params[:id]}"
+end
