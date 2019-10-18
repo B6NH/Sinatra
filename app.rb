@@ -10,6 +10,8 @@ class Post
     property :title, String
     property :body, Text
     property :created_at, DateTime
+
+    has n, :comments
 end
 
 class Comment
@@ -18,6 +20,8 @@ class Comment
   property :id,         Serial
   property :posted_by,  String
   property :body,       Text
+
+  belongs_to :post
 end
 
 DataMapper.finalize
