@@ -11,7 +11,7 @@ class Post
     property :body, Text
     property :created_at, DateTime
 
-    has n, :comments
+    has n, :comments, constraint: :destroy
 end
 
 class Comment
