@@ -31,25 +31,30 @@ get '/' do
   erb :index
 end
 
+# SHOW ALL POSTS
 get '/posts' do
   @posts = Post.all(:order => [ :id.desc ], :limit => 20)
   erb :posts
 end
 
+# NEW POST FORM
 get '/posts/new' do
   erb :posts_new
 end
 
+# SHOW POST
 get '/posts/:id' do
   @post = Post.get(params[:id])
   erb :posts_show
 end
 
+# EDIT POST FORM
 get '/posts/:id/edit' do
   @post = Post.get(params[:id])
   erb :posts_edit
 end
 
+# CREATE POST
 post '/posts' do
   Post.create(
     :title      => params[:title],
@@ -59,18 +64,24 @@ post '/posts' do
   redirect '/posts'
 end
 
+
+# UPDATE POST
 put '/posts/:id' do
   post = Post.get(params[:id])
   post.update(title:params[:title],body:params[:body])
   redirect '/posts'
 end
 
+
+# DESTROY POST
 delete '/posts/:id' do
   post = Post.get(params[:id])
   post.destroy
   redirect '/posts'
 end
 
+
+# CREATE COMMENT
 post '/posts/:id/comments' do
   post = Post.get(params[:id])
   post.comments.create(
@@ -80,6 +91,7 @@ post '/posts/:id/comments' do
   redirect "/posts/#{params[:id]}"
 end
 
+# DESTROY COMMENT
 delete '/posts/:post_id/comments/:comment_id' do
   comment = Comment.get(params[:comment_id])
   comment.destroy
