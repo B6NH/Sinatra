@@ -8,7 +8,11 @@
 <% @post.comments.each do |comment| %>
     <li>
       <%= comment.posted_by %> -
-      <%= comment.body %>
+      <%= comment.body %> -
+      <form action="/posts/<%= @post.id %>/comments/<%= comment.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type ="submit" value="Destroy">
+      </form>
     </li>
 <% end %>
 </ul>

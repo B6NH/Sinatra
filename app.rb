@@ -79,3 +79,9 @@ post '/posts/:id/comments' do
   )
   redirect "/posts/#{params[:id]}"
 end
+
+delete '/posts/:post_id/comments/:comment_id' do
+  comment = Comment.get(params[:comment_id])
+  comment.destroy
+  redirect "/posts/#{params[:post_id]}"
+end
