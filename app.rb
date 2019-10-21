@@ -1,6 +1,8 @@
 require 'bundler/setup'
 require 'sinatra'
 require 'data_mapper'
+require 'sinatra/flash'
+enable :sessions
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/blog.db")
 
@@ -61,6 +63,7 @@ post '/posts' do
     :body       => params[:body],
     :created_at => Time.now
   )
+  flash['notice'] = "Post created"
   redirect '/posts'
 end
 
@@ -69,6 +72,7 @@ end
 put '/posts/:id' do
   post = Post.get(params[:id])
   post.update(title:params[:title],body:params[:body])
+  flash['notice'] = "Post updated"
   redirect '/posts'
 end
 
@@ -77,6 +81,7 @@ end
 delete '/posts/:id' do
   post = Post.get(params[:id])
   post.destroy
+  flash['notice'] = "Post destroyed"
   redirect '/posts'
 end
 
@@ -88,6 +93,7 @@ post '/posts/:id/comments' do
     :posted_by  => params[:posted_by],
     :body       => params[:body]
   )
+  flash['notice'] = "Comment created"
   redirect "/posts/#{params[:id]}"
 end
 
@@ -95,5 +101,6 @@ end
 delete '/posts/:post_id/comments/:comment_id' do
   comment = Comment.get(params[:comment_id])
   comment.destroy
+  flash['notice'] = "Comment destroyed"
   redirect "/posts/#{params[:post_id]}"
 end
