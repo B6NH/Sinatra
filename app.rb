@@ -9,8 +9,8 @@ DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/blog.db")
 class Post
     include DataMapper::Resource
     property :id, Serial
-    property :title, String
-    property :body, Text
+    property :title, String, :required => true
+    property :body, Text, :required => true
     property :created_at, DateTime
 
     has n, :comments, constraint: :destroy
@@ -58,13 +58,18 @@ end
 
 # CREATE POST
 post '/posts' do
-  Post.create(
+  post = Post.new(
     :title      => params[:title],
     :body       => params[:body],
     :created_at => Time.now
   )
-  flash[:notice] = "Post created"
-  redirect '/posts'
+  if post.save
+    flash[:notice] = "Post created"
+    redirect '/posts'
+  else
+    flash[:error] = "Error"
+    redirect '/posts/new'
+  end
 end
 
 
