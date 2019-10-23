@@ -2,19 +2,29 @@
 
 <h4 style="color:green;"><%= flash[:notice] %></h4>
 
+<h4>
 <a href="/posts/new">Create Post</a>
-
-<ul>
-<% @posts.each do |post| %>
-    <li>
-      <%= post.title %> -
-      <%= post.body %> -
-      <a href="/posts/<%= post.id %>">Show</a> -
-      <a href="/posts/<%= post.id %>/edit">Edit</a> -
-      <form action="/posts/<%= post.id %>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type ="submit" value="Destroy">
-      </form>
-    </li>
+</h4>
+<table>
+  <tr>
+    <td>Title</td>
+    <td>Body</td>
+    <td>Show</td>
+    <td>Edit</td>
+    <td>Destroy</td>
+  </tr>
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.body %></td>
+      <td><a href="/posts/<%= post.id %>">Show</a></td>
+      <td><a href="/posts/<%= post.id %>/edit">Edit</a></td>
+      <td>
+        <form action="/posts/<%= post.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Destroy">
+        </form>
+      </td>
+    </tr>
 <% end %>
-</ul>
+</table>
