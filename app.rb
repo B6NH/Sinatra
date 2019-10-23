@@ -20,8 +20,8 @@ class Comment
   include DataMapper::Resource
 
   property :id,         Serial
-  property :posted_by,  String
-  property :body,       Text
+  property :posted_by,  String, :required => true
+  property :body,       Text, :required => true
 
   belongs_to :post
 end
@@ -84,7 +84,6 @@ put '/posts/:id' do
     flash[:error] = "Error"
     redirect back
   end
-
 end
 
 
@@ -100,12 +99,16 @@ end
 # CREATE COMMENT
 post '/posts/:id/comments' do
   post = Post.get(params[:id])
-  post.comments.create(
-    :posted_by  => params[:posted_by],
-    :body       => params[:body]
-  )
-  flash[:notice] = "Comment created"
-  redirect "/posts/#{params[:id]}"
+  comment = Comment.new(posted_by:params[:posted_by],body:params[:body])
+  post.comments << comment
+
+  if comment.save
+    flash[:notice] = "Comment created"
+  else
+    flash[:error] = "Error"
+  end
+
+  redirect back
 end
 
 # DESTROY COMMENT
