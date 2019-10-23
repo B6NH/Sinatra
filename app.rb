@@ -116,5 +116,5 @@ delete '/posts/:post_id/comments/:comment_id' do
   comment = Comment.get(params[:comment_id])
   comment.destroy
   flash[:notice] = "Comment destroyed"
-  redirect "/posts/#{params[:post_id]}"
+  redirect back
 end
