@@ -1,0 +1,17 @@
+body{
+  background-color: #ebf5b8;
+  text-align: center;
+}
+
+table, th, td {
+  border: 5px solid black;
+  border-collapse: collapse;
+  padding: 15px;
+  background-color: orange;
+}
+
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+}
