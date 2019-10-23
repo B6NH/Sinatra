@@ -118,3 +118,9 @@ delete '/posts/:post_id/comments/:comment_id' do
   flash[:notice] = "Comment destroyed"
   redirect back
 end
+
+get '/statistics' do
+  @number_of_posts = Post.count
+  @number_of_comments = Comment.count
+  erb :statistics
+end
