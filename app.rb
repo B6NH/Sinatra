@@ -35,7 +35,7 @@ end
 
 # SHOW ALL POSTS
 get '/posts' do
-  @posts = Post.all(:order => [ :id.desc ], :limit => 20)
+  @posts = Post.all(order: [ :id.desc ], limit: 20)
   erb :posts
 end
 
@@ -59,9 +59,9 @@ end
 # CREATE POST
 post '/posts' do
   post = Post.new(
-    :title      => params[:title],
-    :body       => params[:body],
-    :created_at => Time.now
+    title: params[:title],
+    body: params[:body],
+    created_at: Time.now
   )
   if post.save
     flash[:notice] = "Post created"
@@ -99,8 +99,7 @@ end
 # CREATE COMMENT
 post '/posts/:id/comments' do
   post = Post.get(params[:id])
-  comment = Comment.new(posted_by:params[:posted_by],body:params[:body])
-  post.comments << comment
+  comment = post.comments.new(posted_by:params[:posted_by],body:params[:body])
 
   if comment.save
     flash[:notice] = "Comment created"
