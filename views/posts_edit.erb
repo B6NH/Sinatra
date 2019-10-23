@@ -1,5 +1,7 @@
 <h2>Edit Post</h2>
 
+<h4 style="color:red;"><%= flash[:error] %></h4>
+
 <form action="/posts/<%= @post.id %>" method="post">
   <input type="hidden" name="_method" value="put">
   <label for="title">Title</label>

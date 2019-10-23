@@ -68,7 +68,7 @@ post '/posts' do
     redirect '/posts'
   else
     flash[:error] = "Error"
-    redirect '/posts/new'
+    redirect back
   end
 end
 
@@ -76,9 +76,15 @@ end
 # UPDATE POST
 put '/posts/:id' do
   post = Post.get(params[:id])
-  post.update(title:params[:title],body:params[:body])
-  flash[:notice] = "Post updated"
-  redirect '/posts'
+
+  if post.update(title:params[:title],body:params[:body])
+    flash[:notice] = "Post updated"
+    redirect '/posts'
+  else
+    flash[:error] = "Error"
+    redirect back
+  end
+
 end
 
 
