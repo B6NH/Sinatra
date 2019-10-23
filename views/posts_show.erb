@@ -13,7 +13,7 @@
       <%= comment.body %> -
       <form action="/posts/<%= @post.id %>/comments/<%= comment.id %>" method="post">
         <input type="hidden" name="_method" value="delete">
-        <input type ="submit" value="Destroy">
+        <input type ="submit" value="Destroy" onclick="return confirmation();">
       </form>
     </li>
 <% end %>
@@ -32,3 +32,10 @@
 <br>
 
 <a href="/posts">Back</a>
+
+
+<script>
+  function confirmation(){
+    return window.confirm("Are you sure?");
+  }
+</script>
