@@ -1,6 +1,21 @@
 <h2><%= @post.title %></h2>
 <p><%= @post.body %></p>
 
+<table>
+  <tr>
+    <th>Up</th>
+    <th>Down</th>
+    <th>---</th>
+    <th>---</th>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>34</td>
+    <td>Upvote</td>
+    <td>Downvote</td>
+  </tr>
+</table>
+
 <h4 style="color:green;"><%= flash[:notice] %></h4>
 <h4 style="color:red;"><%= flash[:error] %></h4>
 
