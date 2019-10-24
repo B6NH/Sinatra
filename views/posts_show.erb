@@ -11,8 +11,16 @@
   <tr>
     <td><%= @post.post_rating.votes_up %></td>
     <td><%= @post.post_rating.votes_down %></td>
-    <td>Upvote</td>
-    <td>Downvote</td>
+    <td>
+      <form action="#" method="post">
+        <input type ="submit" value="Vote Up">
+      </form>
+    </td>
+    <td>
+      <form action="#" method="post">
+        <input type ="submit" value="Vote Down">
+      </form>
+    </td>
   </tr>
 </table>
 
