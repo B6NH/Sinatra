@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'sinatra'
 require 'data_mapper'
 require 'sinatra/flash'
+require 'will_paginate/data_mapper'
 enable :sessions
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/blog.db")
@@ -35,7 +36,7 @@ end
 
 # SHOW ALL POSTS
 get '/posts' do
-  @posts = Post.all(order: [ :id.desc ], limit: 20)
+  @posts = Post.paginate(page: params[:page], per_page: 3)
   erb :posts
 end
 
