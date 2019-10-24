@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'sinatra'
 require 'data_mapper'
 require 'sinatra/flash'
+require 'will_paginate'
 require 'will_paginate/data_mapper'
 enable :sessions
 
