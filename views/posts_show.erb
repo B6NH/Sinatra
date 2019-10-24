@@ -6,18 +6,25 @@
 
 <h3>Comments</h3>
 
-<ul>
+<table>
+  <tr>
+    <th>Author</th>
+    <th>Body</th>
+    <th>Destroy</th>
+  </tr>
 <% @post.comments.each do |comment| %>
-    <li>
-      <%= comment.posted_by %> -
-      <%= comment.body %> -
-      <form action="/posts/<%= @post.id %>/comments/<%= comment.id %>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type ="submit" value="Destroy" onclick="return confirmation();">
-      </form>
-    </li>
+    <tr>
+      <td><%= comment.posted_by %></td>
+      <td><%= comment.body %></td>
+      <td>
+        <form action="/posts/<%= @post.id %>/comments/<%= comment.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type ="submit" value="Destroy" onclick="return confirmation();">
+        </form>
+      </td>
+    </tr>
 <% end %>
-</ul>
+</table>
 
 <h3>Add Comment</h3>
 
