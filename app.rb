@@ -16,6 +16,7 @@ class Post
     property :created_at, DateTime
 
     has n, :comments, constraint: :destroy
+    has 1, :post_rating
 end
 
 class Comment
@@ -24,6 +25,16 @@ class Comment
   property :id,         Serial
   property :posted_by,  String, :required => true
   property :body,       Text, :required => true
+
+  belongs_to :post
+end
+
+class PostRating
+  include DataMapper::Resource
+
+  property :id,         Serial
+  property :votes_up,    Integer
+  property :votes_down,  Integer
 
   belongs_to :post
 end
