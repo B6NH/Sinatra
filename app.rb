@@ -4,6 +4,7 @@ require 'data_mapper'
 require 'sinatra/flash'
 require 'will_paginate'
 require 'will_paginate/data_mapper'
+require 'faker'
 enable :sessions
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/blog.db")
@@ -16,7 +17,7 @@ class Post
     property :created_at, DateTime
 
     has n, :comments, constraint: :destroy
-    has 1, :post_rating
+    has 1, :post_rating, constraint: :destroy
 end
 
 class Comment
@@ -41,6 +42,21 @@ end
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
+
+
+# SEED DATABASE
+if (Post.count < 5)
+  10.times do
+    Post.create(
+      title: Faker::Coffee.blend_name,
+      body: Faker::Coffee.origin,
+      created_at: Time.now,
+      post_rating: PostRating.new(votes_up:0,votes_down:0)
+    )
+  end
+end
+
+
 
 get '/' do
   erb :index
