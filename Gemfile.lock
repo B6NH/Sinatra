@@ -6,6 +6,7 @@ GEM
     bcrypt (3.1.13)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    concurrent-ruby (1.1.5)
     data_mapper (1.2.0)
       dm-aggregates (~> 1.2.0)
       dm-constraints (~> 1.2.0)
@@ -54,7 +55,11 @@ GEM
       dm-core (~> 1.2.0)
     do_sqlite3 (0.10.17)
       data_objects (= 0.10.17)
+    faker (2.6.0)
+      i18n (>= 1.6, < 1.8)
     fastercsv (1.5.5)
+    i18n (1.7.0)
+      concurrent-ruby (~> 1.0)
     json (1.8.6)
     json_pure (1.8.6)
     multi_json (1.14.1)
@@ -81,6 +86,7 @@ PLATFORMS
 DEPENDENCIES
   data_mapper
   dm-sqlite-adapter
+  faker
   sinatra
   sinatra-flash
   will_paginate
