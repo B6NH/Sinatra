@@ -74,7 +74,8 @@ post '/posts' do
   post = Post.new(
     title: params[:title],
     body: params[:body],
-    created_at: Time.now
+    created_at: Time.now,
+    post_rating: PostRating.new(votes_up:0,votes_down:0)
   )
   if post.save
     flash[:notice] = "Post created"
