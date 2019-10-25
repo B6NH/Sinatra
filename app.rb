@@ -146,6 +146,7 @@ put '/upvote_post/:post_id' do
   post = Post.get(params[:post_id])
   votes = post.votes_up
   post.update(votes_up:votes+1)
+  flash[:notice] = "Upvoted"
   redirect back
 end
 
@@ -153,6 +154,7 @@ put '/downvote_post/:post_id' do
   post = Post.get(params[:post_id])
   votes = post.votes_down
   post.update(votes_down:votes+1)
+  flash[:notice] = "Downvoted"
   redirect back
 end
 
