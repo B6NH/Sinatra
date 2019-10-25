@@ -142,6 +142,20 @@ delete '/posts/:post_id/comments/:comment_id' do
   redirect back
 end
 
+put '/upvote_post/:post_id' do
+  post = Post.get(params[:post_id])
+  votes = post.votes_up
+  post.update(votes_up:votes+1)
+  redirect back
+end
+
+put '/downvote_post/:post_id' do
+  post = Post.get(params[:post_id])
+  votes = post.votes_down
+  post.update(votes_down:votes+1)
+  redirect back
+end
+
 get '/statistics' do
   @number_of_posts = Post.count
   @number_of_comments = Comment.count
