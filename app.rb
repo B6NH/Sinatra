@@ -14,10 +14,11 @@ class Post
     property :id, Serial
     property :title, String, :required => true
     property :body, Text, :required => true
+    property :votes_up,    Integer
+    property :votes_down,  Integer
     property :created_at, DateTime
 
     has n, :comments, constraint: :destroy
-    has 1, :post_rating, constraint: :destroy
 end
 
 class Comment
@@ -30,15 +31,6 @@ class Comment
   belongs_to :post
 end
 
-class PostRating
-  include DataMapper::Resource
-
-  property :id,         Serial
-  property :votes_up,    Integer
-  property :votes_down,  Integer
-
-  belongs_to :post
-end
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
@@ -50,8 +42,9 @@ if (Post.count < 5)
     Post.create(
       title: Faker::Coffee.blend_name,
       body: Faker::Coffee.origin,
-      created_at: Time.now,
-      post_rating: PostRating.new(votes_up:0,votes_down:0)
+      votes_up: 0,
+      votes_down: 0,
+      created_at: Time.now
     )
   end
 end
@@ -90,8 +83,9 @@ post '/posts' do
   post = Post.new(
     title: params[:title],
     body: params[:body],
-    created_at: Time.now,
-    post_rating: PostRating.new(votes_up:0,votes_down:0)
+    votes_up: 0,
+    votes_down: 0,
+    created_at: Time.now
   )
   if post.save
     flash[:notice] = "Post created"
