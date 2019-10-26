@@ -36,17 +36,22 @@ end
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
+def newPost(title,body)
+  post = Post.new(
+    title: title,
+    body: body,
+    votes_up: 0,
+    votes_down: 0,
+    created_at: Time.now
+  )
+end
+
 
 # SEED DATABASE
 if (Post.count < 5)
   10.times do
-    Post.create(
-      title: Faker::Coffee.blend_name,
-      body: Faker::Coffee.origin,
-      votes_up: 0,
-      votes_down: 0,
-      created_at: Time.now
-    )
+    post = newPost(Faker::Coffee.blend_name,Faker::Coffee.origin)
+    post.save
   end
 end
 
@@ -81,13 +86,8 @@ end
 
 # CREATE POST
 post '/posts' do
-  post = Post.new(
-    title: params[:title],
-    body: params[:body],
-    votes_up: 0,
-    votes_down: 0,
-    created_at: Time.now
-  )
+  post = newPost(params[:title],params[:body])
+
   if post.save
     flash[:notice] = "Post created"
     redirect '/posts'
