@@ -5,6 +5,7 @@ require 'sinatra/flash'
 require 'will_paginate'
 require 'will_paginate/data_mapper'
 require 'faker'
+require "sinatra/cookies"
 enable :sessions
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/blog.db")
@@ -158,6 +159,16 @@ put '/downvote_post/:post_id' do
   votes = post.votes_down
   post.update(votes_down:votes+1)
   flash[:notice] = "Downvoted"
+  redirect back
+end
+
+get '/settings' do
+  erb :settings
+end
+
+put '/settings' do
+  cookies[:color] = params[:color]
+  flash[:notice] = "Saved"
   redirect back
 end
 

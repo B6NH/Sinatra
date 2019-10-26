@@ -1,0 +1,16 @@
+
+
+<h2>Settings</h2>
+
+<h4 style="color:green;"><%= flash[:notice] %></h4>
+
+<form action="/settings" method="post">
+  <input type="hidden" name="_method" value="put">
+  <label for="color">Color</label>
+  <input type="text" name="color" value="<%= cookies[:color] %>">
+  <input type ="submit" value="Save">
+</form>
+
+<br>
+
+<a href="/posts">Back</a>
