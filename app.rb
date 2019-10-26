@@ -146,19 +146,31 @@ end
 
 # UPVOTE POST
 put '/upvote_post/:post_id' do
-  post = Post.get(params[:post_id])
-  votes = post.votes_up
-  post.update(votes_up:votes+1)
-  flash[:notice] = "Upvoted"
+  id = params[:post_id]
+  if(cookies["voted_#{id}"].nil?)
+    post = Post.get(id)
+    votes = post.votes_up
+    post.update(votes_up:votes+1)
+    flash[:notice] = "Upvoted"
+    cookies["voted_#{id}"] = true
+  else
+    flash[:error] = "Already voted"
+  end
   redirect back
 end
 
 # DOWNVOTE POST
 put '/downvote_post/:post_id' do
-  post = Post.get(params[:post_id])
-  votes = post.votes_down
-  post.update(votes_down:votes+1)
-  flash[:notice] = "Downvoted"
+  id = params[:post_id]
+  if(cookies["voted_#{id}"].nil?)
+    post = Post.get(id)
+    votes = post.votes_down
+    post.update(votes_down:votes+1)
+    flash[:notice] = "Downvoted"
+    cookies["voted_#{id}"] = true
+  else
+    flash[:error] = "Already voted"
+  end
   redirect back
 end
 
