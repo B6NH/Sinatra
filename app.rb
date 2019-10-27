@@ -163,7 +163,7 @@ put '/rate_post/:post_id' do
       post.update(votes_down:votes+1)
       flash[:notice] = "Downvoted"
     end
-    cookies["voted_#{id}"] = true
+    response.set_cookie("voted_#{id}", :value => true, :expires => Time.now + 3600*24)
   else
     flash[:error] = "Already voted"
   end
@@ -175,7 +175,7 @@ get '/settings' do
 end
 
 put '/settings' do
-  cookies[:color] = params[:color]
+  response.set_cookie(:color, :value => params[:color], :expires => Time.now + 3600*24)
   flash[:notice] = "Saved"
   redirect back
 end
