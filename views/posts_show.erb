@@ -12,14 +12,16 @@
     <td><%= @post.votes_up %></td>
     <td><%= @post.votes_down %></td>
     <td>
-      <form action="/upvote_post/<%= @post.id %>" method="post">
+      <form action="/rate_post/<%= @post.id %>" method="post">
         <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="_vote_type" value="up">
         <input type ="submit" value="Vote Up">
       </form>
     </td>
     <td>
-      <form action="/downvote_post/<%= @post.id %>" method="post">
+      <form action="/rate_post/<%= @post.id %>" method="post">
         <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="_vote_type" value="down">
         <input type ="submit" value="Vote Down">
       </form>
     </td>

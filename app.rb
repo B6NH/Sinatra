@@ -143,30 +143,26 @@ delete '/posts/:post_id/comments/:comment_id' do
   redirect back
 end
 
-
-# UPVOTE POST
-put '/upvote_post/:post_id' do
-  id = params[:post_id]
-  if(cookies["voted_#{id}"].nil?)
-    post = Post.get(id)
-    votes = post.votes_up
-    post.update(votes_up:votes+1)
-    flash[:notice] = "Upvoted"
-    cookies["voted_#{id}"] = true
-  else
-    flash[:error] = "Already voted"
-  end
-  redirect back
+post '/rate_post/:post_id' do
+  "cycki"
 end
 
-# DOWNVOTE POST
-put '/downvote_post/:post_id' do
+# RATE POST
+put '/rate_post/:post_id' do
+  vType = params[:_vote_type]
   id = params[:post_id]
+
   if(cookies["voted_#{id}"].nil?)
     post = Post.get(id)
-    votes = post.votes_down
-    post.update(votes_down:votes+1)
-    flash[:notice] = "Downvoted"
+    if(vType=="up")
+      votes = post.votes_up
+      post.update(votes_up:votes+1)
+      flash[:notice] = "Upvoted"
+    else
+      votes = post.votes_down
+      post.update(votes_down:votes+1)
+      flash[:notice] = "Downvoted"
+    end
     cookies["voted_#{id}"] = true
   else
     flash[:error] = "Already voted"
