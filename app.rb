@@ -46,10 +46,10 @@ end
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-Category.create(name:"Games")
-Category.create(name:"Movies")
-Category.create(name:"Music")
-Category.create(name:"Sport")
+Category.create(name:"games")
+Category.create(name:"movies")
+Category.create(name:"music")
+Category.create(name:"sport")
 
 
 def newPost(title,body)
@@ -73,10 +73,15 @@ end
 
 
 post = Post.first
-games = Category.first(name:"Games")
-sport = Category.first(name:"Sport")
+games = Category.first(name:"games")
+sport = Category.first(name:"sport")
+music = Category.first(name:"music")
 post.categories << games
 post.categories << sport
+post.save
+post = Post.get(2)
+post.categories << games
+post.categories << music
 post.save
 
 
@@ -204,6 +209,12 @@ end
 get '/categories' do
   @categories = Category.all
   erb :categories
+end
+
+get '/category/:name' do
+  @category = Category.first(name:params[:name])
+  @posts = @category.posts
+  erb :category_posts
 end
 
 # STATISTICS
