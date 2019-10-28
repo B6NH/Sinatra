@@ -143,9 +143,6 @@ delete '/posts/:post_id/comments/:comment_id' do
   redirect back
 end
 
-post '/rate_post/:post_id' do
-  "cycki"
-end
 
 # RATE POST
 put '/rate_post/:post_id' do
