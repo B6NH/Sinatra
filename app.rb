@@ -201,6 +201,11 @@ put '/settings' do
   redirect back
 end
 
+get '/categories' do
+  @categories = Category.all
+  erb :categories
+end
+
 # STATISTICS
 get '/statistics' do
   @number_of_posts = Post.count
