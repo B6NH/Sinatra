@@ -20,6 +20,7 @@ class Post
     property :created_at, DateTime
 
     has n, :comments, constraint: :destroy
+    has n, :categories, :through => Resource
 end
 
 class Comment
@@ -32,9 +33,24 @@ class Comment
   belongs_to :post
 end
 
+class Category
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :name,  String, :unique => true
+
+  has n, :posts, :through => Resource
+end
+
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
+
+Category.create(name:"Games")
+Category.create(name:"Movies")
+Category.create(name:"Music")
+Category.create(name:"Sport")
+
 
 def newPost(title,body)
   post = Post.new(
