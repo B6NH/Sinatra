@@ -28,6 +28,13 @@
   </tr>
 </table>
 
+<h4>Categories:</h4>
+<ul>
+<% @post.categories.each do |category| %>
+  <li><%= category.name %></li>
+<% end %>
+</ul>
+
 <h4 style="color:green;"><%= flash[:notice] %></h4>
 <h4 style="color:red;"><%= flash[:error] %></h4>
 
@@ -52,6 +59,8 @@
     </tr>
 <% end %>
 </table>
+
+
 
 <h3>Add Comment</h3>
 

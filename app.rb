@@ -72,6 +72,14 @@ if (Post.count < 5)
 end
 
 
+post = Post.first
+games = Category.first(name:"Games")
+sport = Category.first(name:"Sport")
+post.categories << games
+post.categories << sport
+post.save
+
+
 
 get '/' do
   erb :index
