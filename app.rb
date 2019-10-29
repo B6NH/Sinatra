@@ -47,11 +47,15 @@ class User
 
   property :id,    Serial
   property :name , String, :required => true
+  property :password , String, :required => true
 end
 
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
+
+User.create(name:"Magda",password:"magda123")
+User.create(name:"Ewa",password:"ewa123")
 
 Category.create(name:"games")
 Category.create(name:"movies")
