@@ -232,6 +232,10 @@ get '/category/:name' do
   erb :category_posts
 end
 
+get '/login' do
+  erb :login
+end
+
 # STATISTICS
 get '/statistics' do
   @number_of_posts = Post.count
