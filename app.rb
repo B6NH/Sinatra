@@ -42,6 +42,13 @@ class Category
   has n, :posts, :through => Resource
 end
 
+class User
+  include DataMapper::Resource
+
+  property :id,    Serial
+  property :name , String, :required => true
+end
+
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
