@@ -236,6 +236,32 @@ get '/login' do
   erb :login
 end
 
+post '/login' do
+  name = params[:name]
+  user = User.first(name:name)
+  if(user.nil?||user.password!=params[:password])
+    flash[:error] = "Incorrect name or password"
+    redirect back
+  else
+    response.set_cookie(:user, :value => name, :expires => Time.now + 3600*24)
+    redirect '/profile'
+  end
+end
+
+get '/profile' do
+  if(cookies[:user].nil?)
+    redirect '/login'
+  else
+    @user = User.first(name:cookies[:user])
+    erb :profile
+  end
+end
+
+get '/logout' do
+  response.set_cookie(:user,:expires => Time.now)
+  redirect '/login'
+end
+
 # STATISTICS
 get '/statistics' do
   @number_of_posts = Post.count

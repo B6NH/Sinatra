@@ -1,3 +1,15 @@
 <h2>Login</h2>
 
+<h4 style="color:red;"><%= flash[:error] %></h4>
+
+<form action="/login" method="post">
+  <label for="name">Name</label>
+  <input type="text" name="name">
+  <label for="password">Password</label>
+  <input type="password" name="password">
+  <input type ="submit" value="Login">
+</form>
+
+<br>
+
 <a href="/posts">Back</a>
