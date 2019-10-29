@@ -207,21 +207,25 @@ put '/rate_post/:post_id' do
   redirect back
 end
 
+# SHOW SETTINGS
 get '/settings' do
   erb :settings
 end
 
+# UPDATE SETTINGS
 put '/settings' do
   response.set_cookie(:color, :value => params[:color], :expires => Time.now + 3600*24)
   flash[:notice] = "Saved"
   redirect back
 end
 
+# SHOW ALL CATEGORIES
 get '/categories' do
   @categories = Category.all
   erb :categories
 end
 
+# SHOW POSTS FROM CATEGORY
 get '/category/:name' do
   @category = Category.first(name:params[:name])
   @posts = @category.posts
