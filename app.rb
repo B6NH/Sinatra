@@ -132,7 +132,11 @@ post '/posts' do
     flash[:notice] = "Post created"
     redirect '/posts'
   else
-    flash[:error] = "Error"
+    errors = []
+    post.errors.each do |err|
+      errors << err[0]
+    end
+    flash[:errors] = errors
     redirect back
   end
 end
@@ -146,7 +150,11 @@ put '/posts/:id' do
     flash[:notice] = "Post updated"
     redirect '/posts'
   else
-    flash[:error] = "Error"
+    errors = []
+    post.errors.each do |err|
+      errors << err[0]
+    end
+    flash[:errors] = errors
     redirect back
   end
 end
@@ -169,7 +177,11 @@ post '/posts/:id/comments' do
   if comment.save
     flash[:notice] = "Comment created"
   else
-    flash[:error] = "Error"
+    errors = []
+    comment.errors.each do |err|
+      errors << err[0]
+    end
+    flash[:errors] = errors
   end
 
   redirect back
@@ -202,7 +214,7 @@ put '/rate_post/:post_id' do
     end
     response.set_cookie("voted_#{id}", :value => true, :expires => Time.now + 3600*24)
   else
-    flash[:error] = "Already voted"
+    flash[:errors] = ["Already voted"]
   end
   redirect back
 end

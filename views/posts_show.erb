@@ -36,7 +36,13 @@
 </ul>
 
 <h4 style="color:green;"><%= flash[:notice] %></h4>
-<h4 style="color:red;"><%= flash[:error] %></h4>
+<ul>
+<% unless flash[:errors].nil? %>
+  <% flash[:errors].each do |err| %>
+    <li style="color:red;"><%= err %></li>
+  <% end %>
+<% end %>
+</ul>
 
 <h3>Comments</h3>
 
