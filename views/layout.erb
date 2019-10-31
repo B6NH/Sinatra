@@ -6,6 +6,23 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
   </head>
   <body>
+    <h3>
+    <% if cookies[:user].nil? %>
+      <a href='/logout'>Login</a> |
+      <a href='#'>Register</a>
+    <% else %>
+      <%= cookies[:user] %> |
+      <a href='/profile'>Profile</a> |
+      <a href='/logout'>Logout</a>
+    <% end %>
+    </h3>
     <%= yield %>
+    <br>
+    <nav>
+      <a href="/posts">Posts</a> |
+      <a href="/categories">Categories</a> |
+      <a href="/statistics">Statistics</a> |
+      <a href="/settings">Settings</a>
+    </nav>
   </body>
 </html>
