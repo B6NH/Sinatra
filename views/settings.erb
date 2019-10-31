@@ -7,6 +7,6 @@
 <form action="/settings" method="post">
   <input type="hidden" name="_method" value="put">
   <label for="color">Color</label>
-  <input type="text" name="color" value="<%= cookies[:color] %>">
+  <input type="text" name="color" value="<%= cookies[:color] %>" required >
   <input type ="submit" value="Save">
 </form>

@@ -72,9 +72,9 @@
 
 <form action="/posts/<%= @post.id %>/comments" method="post">
   <label for="posted_by">Author</label>
-  <input type="text" name="posted_by">
+  <input type="text" name="posted_by" required >
   <label for="body">Body</label>
-  <input type="text" name="body">
+  <input type="text" name="body" required >
   <input type ="submit" value="Add Comment">
 </form>
 
