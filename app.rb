@@ -255,7 +255,7 @@ end
 post '/login' do
   name = params[:name]
   user = User.first(name:name)
-  if(user.nil?||user.password!=params[:password])
+  if(user.nil?||!(BCrypt::Password.new(user.password)==params[:password]))
     flash[:error] = "Incorrect name or password"
     redirect back
   else
