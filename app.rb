@@ -5,7 +5,8 @@ require 'sinatra/flash'
 require 'will_paginate'
 require 'will_paginate/data_mapper'
 require 'faker'
-require "sinatra/cookies"
+require 'sinatra/cookies'
+require 'bcrypt'
 enable :sessions
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/blog.db")
@@ -47,15 +48,18 @@ class User
 
   property :id,    Serial
   property :name , String, :required => true, :unique => true
-  property :password , String, :required => true
+  property :password , Text, :required => true
 end
 
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-User.create(name:"Magda",password:"magda123")
-User.create(name:"Ewa",password:"ewa123")
+mpass = BCrypt::Password.create("magda123")
+epass = BCrypt::Password.create("ewa123")
+
+User.create(name:"Magda",password:mpass)
+User.create(name:"Ewa",password:epass)
 
 Category.create(name:"games")
 Category.create(name:"movies")
