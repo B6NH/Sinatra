@@ -28,7 +28,7 @@ class Comment
   include DataMapper::Resource
 
   property :id,         Serial
-  property :posted_by,  String, :required => true, :length => 1..30
+  property :author,  String, :required => true, :length => 1..30
   property :body,       Text, :required => true, :length => 1..160
 
   belongs_to :post
@@ -176,7 +176,7 @@ end
 # CREATE COMMENT
 post '/posts/:id/comments' do
   post = Post.get(params[:id])
-  comment = post.comments.new(posted_by:params[:posted_by],body:params[:body])
+  comment = post.comments.new(author:params[:author],body:params[:body])
 
   if comment.save
     flash[:notice] = "Comment created"

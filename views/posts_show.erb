@@ -54,7 +54,7 @@
   </tr>
 <% @post.comments.each do |comment| %>
     <tr>
-      <td><%= comment.posted_by %></td>
+      <td><%= comment.author %></td>
       <td><%= comment.body %></td>
       <td>
         <form action="/posts/<%= @post.id %>/comments/<%= comment.id %>" method="post">
@@ -71,8 +71,8 @@
 <h3>Add Comment</h3>
 
 <form action="/posts/<%= @post.id %>/comments" method="post">
-  <label for="posted_by">Author</label>
-  <input type="text" name="posted_by" required >
+  <label for="author">Author</label>
+  <input type="text" name="author" required >
   <label for="body">Body</label>
   <input type="text" name="body" required >
   <input type ="submit" value="Add Comment">
