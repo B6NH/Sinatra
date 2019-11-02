@@ -259,22 +259,22 @@ post '/login' do
     flash[:error] = "Incorrect name or password"
     redirect back
   else
-    response.set_cookie(:user, :value => name, :expires => Time.now + 3600*24)
+    session[:user] = name
     redirect '/profile'
   end
 end
 
 get '/profile' do
-  if(cookies[:user].nil?)
+  if(session[:user].nil?)
     redirect '/login'
   else
-    @user = User.first(name:cookies[:user])
+    @user = User.first(name:session[:user])
     erb :profile
   end
 end
 
 get '/logout' do
-  response.set_cookie(:user,:expires => Time.now)
+  session[:user] = nil
   redirect '/login'
 end
 
