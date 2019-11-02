@@ -14,8 +14,8 @@ DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/blog.db")
 class Post
     include DataMapper::Resource
     property :id, Serial
-    property :title, String, :required => true
-    property :body, Text, :required => true
+    property :title, String, :required => true, :length => 1..30
+    property :body, Text, :required => true, :length => 1..160
     property :votes_up,    Integer
     property :votes_down,  Integer
     property :created_at, DateTime
@@ -28,8 +28,8 @@ class Comment
   include DataMapper::Resource
 
   property :id,         Serial
-  property :posted_by,  String, :required => true
-  property :body,       Text, :required => true
+  property :posted_by,  String, :required => true, :length => 1..30
+  property :body,       Text, :required => true, :length => 1..160
 
   belongs_to :post
 end
@@ -38,7 +38,7 @@ class Category
   include DataMapper::Resource
 
   property :id, Serial
-  property :name,  String, :unique => true
+  property :name,  String, :unique => true, :length => 1..30
 
   has n, :posts, :through => Resource
 end
@@ -47,7 +47,7 @@ class User
   include DataMapper::Resource
 
   property :id,    Serial
-  property :name , String, :required => true, :unique => true
+  property :name , String, :required => true, :unique => true, :length => 1..30
   property :password , Text, :required => true
 end
 
