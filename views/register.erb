@@ -1,0 +1,23 @@
+<h2>Register</h2>
+
+<ul>
+<% unless flash[:errors].nil? %>
+  <% flash[:errors].each do |err| %>
+    <li style="color:red;"><%= err %></li>
+  <% end %>
+<% end %>
+</ul>
+
+<form action="/register" method="post">
+
+  <label for="name">Name</label>
+  <input type="text" name="name" required >
+
+  <label for="password">Password</label>
+  <input type="password" name="password" required >
+
+  <label for="password2">Password2</label>
+  <input type="password" name="password2" required >
+
+  <input type ="submit" value="Register">
+</form>

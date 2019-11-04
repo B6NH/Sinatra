@@ -264,6 +264,32 @@ post '/login' do
   end
 end
 
+get '/register' do
+  erb :register
+end
+
+post '/register' do
+  if(params[:password]!=params[:password2])
+    flash[:errors] = ["Passwords dont match"]
+    redirect back
+  else
+    hash = BCrypt::Password.create(params[:password])
+    user = User.new(name:params[:name],password:hash)
+
+    if user.save
+      flash[:notice] = "User created"
+      redirect '/posts'
+    else
+      errors = []
+      user.errors.each do |err|
+        errors << err[0]
+      end
+      flash[:errors] = errors
+      redirect back
+    end
+  end
+end
+
 get '/profile' do
   if(session[:user].nil?)
     redirect '/login'

@@ -9,7 +9,7 @@
     <h3>
     <% if session[:user].nil? %>
       <a href='/logout'>Login</a> |
-      <a href='#'>Register</a>
+      <a href='/register'>Register</a>
     <% else %>
       <%= session[:user] %> |
       <a href='/profile'>Profile</a> |
