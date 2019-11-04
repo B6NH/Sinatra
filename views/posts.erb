@@ -4,6 +4,12 @@
 
 <h4><a href="/posts/new">Create Post</a></h4>
 
+<% if params[:ord].nil?||params[:ord]=='asc' %>
+  <a href="/posts?ord=desc">DESC</a>
+<% else %>
+  <a href="/posts?ord=asc">ASC</a>
+<% end %>
+
 <table>
   <tr>
     <th>Title</th>

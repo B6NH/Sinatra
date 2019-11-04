@@ -107,7 +107,9 @@ end
 
 # SHOW ALL POSTS
 get '/posts' do
-  @posts = Post.paginate(page: params[:page], per_page: 3)
+  pord = params[:ord]
+  ord = pord.nil?||pord=='asc' ? :title : :title.desc
+  @posts = Post.all(order: [ ord ]).paginate(page: params[:page], per_page: 3)
   erb :posts
 end
 
