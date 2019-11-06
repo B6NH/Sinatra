@@ -77,6 +77,14 @@ def newPost(title,body)
   )
 end
 
+def setFlashErrors(model)
+  errors = []
+  model.errors.each do |err|
+    errors << err[0]
+  end
+  flash[:errors] = errors
+end
+
 
 # SEED DATABASE
 if (Post.count < 5)
@@ -138,11 +146,7 @@ post '/posts' do
     flash[:notice] = "Post created"
     redirect '/posts'
   else
-    errors = []
-    post.errors.each do |err|
-      errors << err[0]
-    end
-    flash[:errors] = errors
+    setFlashErrors(post)
     redirect back
   end
 end
@@ -156,11 +160,7 @@ put '/posts/:id' do
     flash[:notice] = "Post updated"
     redirect '/posts'
   else
-    errors = []
-    post.errors.each do |err|
-      errors << err[0]
-    end
-    flash[:errors] = errors
+    setFlashErrors(post)
     redirect back
   end
 end
@@ -183,11 +183,7 @@ post '/posts/:id/comments' do
   if comment.save
     flash[:notice] = "Comment created"
   else
-    errors = []
-    comment.errors.each do |err|
-      errors << err[0]
-    end
-    flash[:errors] = errors
+    setFlashErrors(comment)
   end
 
   redirect back
@@ -282,11 +278,7 @@ post '/register' do
       flash[:notice] = "User created"
       redirect '/posts'
     else
-      errors = []
-      user.errors.each do |err|
-        errors << err[0]
-      end
-      flash[:errors] = errors
+      setFlashErrors(user)
       redirect back
     end
   end
