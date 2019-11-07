@@ -4,42 +4,44 @@
 
 <h4><a href="/posts/new">Create Post</a></h4>
 
-
-<form action="/posts" method="get">
-  <label for="title">Title</label>
-  <input type="text" name="title" value="<%= params[:title] %>">
-  <input type ="submit" value="Filter">
-</form>
-
-<% if params[:order].nil?||params[:order]=='asc' %>
-  <a href="/posts?order=desc&title=<%= params[:title] %>">DESC</a>
+<% if @posts.empty? %>
+  <p>No posts</p>
 <% else %>
-  <a href="/posts?order=asc&title=<%= params[:title] %>"">ASC</a>
-<% end %>
+  <form action="/posts" method="get">
+    <label for="title">Title</label>
+    <input type="text" name="title" value="<%= params[:title] %>">
+    <input type ="submit" value="Filter">
+  </form>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Body</th>
-    <th>Show</th>
-    <th>Edit</th>
-    <th>Destroy</th>
-  </tr>
-  <% @posts.each do |post| %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= post.body %></td>
-      <td><a href="/posts/<%= post.id %>">Show</a></td>
-      <td><a href="/posts/<%= post.id %>/edit">Edit</a></td>
-      <td>
-        <form action="/posts/<%= post.id %>" method="post">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="Destroy" onclick="return confirmation();">
-        </form>
-      </td>
-    </tr>
+  <% if params[:order].nil?||params[:order]=='asc' %>
+    <a href="/posts?order=desc&title=<%= params[:title] %>">DESC</a>
+  <% else %>
+    <a href="/posts?order=asc&title=<%= params[:title] %>"">ASC</a>
   <% end %>
-</table>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Destroy</th>
+    </tr>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.body %></td>
+        <td><a href="/posts/<%= post.id %>">Show</a></td>
+        <td><a href="/posts/<%= post.id %>/edit">Edit</a></td>
+        <td>
+          <form action="/posts/<%= post.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Destroy" onclick="return confirmation();">
+          </form>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
 
 <p><%= will_paginate @posts %></p>
 

@@ -21,7 +21,7 @@ class Post
     property :created_at, DateTime
 
     has n, :comments, constraint: :destroy
-    has n, :categories, :through => Resource
+    has n, :categories, :through => Resource, constraint: :skip
 end
 
 class Comment
@@ -40,7 +40,7 @@ class Category
   property :id, Serial
   property :name,  String, :unique => true, :length => 1..30
 
-  has n, :posts, :through => Resource
+  has n, :posts, :through => Resource, constraint: :skip
 end
 
 class User
