@@ -3,4 +3,11 @@
 <div>
   Name: <%= @user.name %> |
   Gold: 500
+  <p>
+    <% if @user.admin %>
+      Administrative user
+    <% else %>
+      Normal user
+    <% end %>
+  </p>
 </div>

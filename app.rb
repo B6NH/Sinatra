@@ -60,7 +60,7 @@ mpass = BCrypt::Password.create("magda123")
 epass = BCrypt::Password.create("ewa123")
 
 User.create(name:"Magda",password:mpass)
-User.create(name:"Ewa",password:epass)
+User.create(name:"Ewa",password:epass,admin:true)
 
 Category.create(name:"games")
 Category.create(name:"movies")
