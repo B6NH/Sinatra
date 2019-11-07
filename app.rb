@@ -115,9 +115,10 @@ end
 
 # SHOW ALL POSTS
 get '/posts' do
-  pord = params[:ord]
-  ord = pord.nil?||pord=='asc' ? :title : :title.desc
-  @posts = Post.all(order: [ ord ]).paginate(page: params[:page], per_page: 3)
+  p_order = params[:order]
+  p_title = params[:title]
+  ord = p_order.nil?||p_order=='asc' ? :title : :title.desc
+  @posts = Post.all(:order => [ ord ], :title.like => "%#{p_title}%").paginate(page: params[:page], per_page: 3)
   erb :posts
 end
 
