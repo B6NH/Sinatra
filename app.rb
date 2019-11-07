@@ -16,9 +16,9 @@ class Post
     property :id, Serial
     property :title, String, :required => true, :length => 1..30
     property :body, Text, :required => true, :length => 1..160
-    property :votes_up,    Integer
-    property :votes_down,  Integer
-    property :created_at, DateTime
+    property :votes_up,    Integer, :default => 0
+    property :votes_down,  Integer, :default => 0
+    property :created_at, DateTime, :default => Time.now.to_datetime
 
     has n, :comments, constraint: :destroy
     has n, :categories, :through => Resource, constraint: :skip
@@ -49,6 +49,7 @@ class User
   property :id,    Serial
   property :name , String, :required => true, :unique => true, :length => 1..30
   property :password , Text, :required => true
+  property :admin, Boolean, :default => false
 end
 
 
@@ -66,17 +67,6 @@ Category.create(name:"movies")
 Category.create(name:"music")
 Category.create(name:"sport")
 
-
-def newPost(title,body)
-  post = Post.new(
-    title: title,
-    body: body,
-    votes_up: 0,
-    votes_down: 0,
-    created_at: Time.now
-  )
-end
-
 def setFlashErrors(model)
   errors = []
   model.errors.each do |err|
@@ -89,7 +79,7 @@ end
 # SEED DATABASE
 if (Post.count < 5)
   10.times do
-    post = newPost(Faker::Coffee.blend_name,Faker::Coffee.origin)
+    post = Post.new(title:Faker::Coffee.blend_name,body:Faker::Coffee.origin)
     post.save
   end
 end
@@ -141,7 +131,7 @@ end
 
 # CREATE POST
 post '/posts' do
-  post = newPost(params[:title],params[:body])
+  post = Post.new(title:params[:title],body:params[:body])
 
   if post.save
     flash[:notice] = "Post created"
