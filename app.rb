@@ -119,6 +119,7 @@ end
 
 # SHOW POST
 get '/posts/:id' do
+  @user = User.first(name:session[:user])
   @post = Post.get(params[:id])
   erb :posts_show
 end

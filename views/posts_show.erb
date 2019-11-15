@@ -53,18 +53,22 @@
     <tr>
       <th>Author</th>
       <th>Body</th>
-      <th>Destroy</th>
+      <% if !@user.nil?&&@user.admin %>
+        <th>Destroy</th>
+      <% end %>
     </tr>
   <% @post.comments.each do |comment| %>
       <tr>
         <td><%= comment.author %></td>
         <td><%= comment.body %></td>
-        <td>
-          <form action="/posts/<%= @post.id %>/comments/<%= comment.id %>" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <input type ="submit" value="Destroy" onclick="return confirmation();">
-          </form>
-        </td>
+        <% if !@user.nil?&&@user.admin %>
+          <td>
+            <form action="/posts/<%= @post.id %>/comments/<%= comment.id %>" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <input type ="submit" value="Destroy" onclick="return confirmation();">
+            </form>
+          </td>
+        <% end %>
       </tr>
   <% end %>
   </table>
