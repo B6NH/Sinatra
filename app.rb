@@ -105,6 +105,7 @@ end
 
 # SHOW ALL POSTS
 get '/posts' do
+  @user = User.first(name:session[:user])
   p_order = params[:order]
   p_title = params[:title]
   ord = p_order.nil?||p_order=='asc' ? :title : :title.desc

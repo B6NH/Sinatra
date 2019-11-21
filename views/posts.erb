@@ -24,7 +24,9 @@
       <th>Body</th>
       <th>Show</th>
       <th>Edit</th>
-      <th>Destroy</th>
+      <% if !@user.nil?&&@user.admin %>
+        <th>Destroy</th>
+      <% end %>
     </tr>
     <% @posts.each do |post| %>
       <tr>
@@ -32,12 +34,14 @@
         <td><%= post.body %></td>
         <td><a href="/posts/<%= post.id %>">Show</a></td>
         <td><a href="/posts/<%= post.id %>/edit">Edit</a></td>
-        <td>
-          <form action="/posts/<%= post.id %>" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <input type="submit" value="Destroy" onclick="return confirmation();">
-          </form>
-        </td>
+        <% if !@user.nil?&&@user.admin %>
+          <td>
+            <form action="/posts/<%= post.id %>" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <input type="submit" value="Destroy" onclick="return confirmation();">
+            </form>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </table>
