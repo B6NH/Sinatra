@@ -1,0 +1,11 @@
+<h2>Transfer Gold</h2>
+
+<p>Your Gold: <%= @user.gold %></p>
+
+<form action="/transfer" method="post">
+  <label for="user_name">User</label>
+  <input type="text" name="user_name" required >
+  <label for="amount">Amount</label>
+  <input type="number" name="amount" required >
+  <input type ="submit" value="Confirm">
+</form>

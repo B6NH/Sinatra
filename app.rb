@@ -50,6 +50,7 @@ class User
   property :name , String, :required => true, :unique => true, :length => 1..30
   property :password , Text, :required => true
   property :admin, Boolean, :default => false
+  property :gold, Integer, :default => 100
 end
 
 
@@ -284,6 +285,19 @@ get '/profile' do
     @user = User.first(name:session[:user])
     erb :profile
   end
+end
+
+get '/transfer' do
+  if(session[:user].nil?)
+    redirect '/login'
+  else
+    @user = User.first(name:session[:user])
+    erb :transfer
+  end
+end
+
+post '/transfer' do
+  "Sending #{params[:amount]} to #{params[:user_name]}"
 end
 
 get '/logout' do

@@ -2,7 +2,7 @@
 
 <div>
   Name: <%= @user.name %> |
-  Gold: 500
+  Gold: <%= @user.name %>
   <p>
     <% if @user.admin %>
       Administrative user
@@ -10,4 +10,5 @@
       Normal user
     <% end %>
   </p>
+  <p><a href='/transfer'>Transfer Gold</a></p>
 </div>
