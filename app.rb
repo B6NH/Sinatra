@@ -331,3 +331,8 @@ get '/statistics' do
   @number_of_comments = Comment.count
   erb :statistics
 end
+
+get '/users' do
+  @users=User.all
+  erb :users
+end
