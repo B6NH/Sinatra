@@ -1,5 +1,8 @@
 <h2>Transfer Gold</h2>
 
+<h4 style="color:green;"><%= flash[:notice] %></h4>
+<h4 style="color:red;"><%= flash[:error] %></h4>
+
 <p>Your Gold: <%= @user.gold %></p>
 
 <form action="/transfer" method="post">

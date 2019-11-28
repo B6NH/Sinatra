@@ -297,7 +297,27 @@ get '/transfer' do
 end
 
 post '/transfer' do
-  "Sending #{params[:amount]} to #{params[:user_name]}"
+  user = User.first(name:session[:user])
+  target = User.first(name:params[:user_name])
+  if(target.nil?||user==target)
+    flash[:error]="Wrong user name"
+    redirect '/transfer'
+  end
+  user_gold=user.gold
+  target_gold=target.gold
+  amount=params[:amount].to_i
+  if(amount<=0)
+    flash[:error]="Wrong amount"
+    redirect '/transfer'
+  end
+  if(amount>user_gold)
+    flash[:error]="Not enough gold"
+    redirect '/transfer'
+  end
+  user.update(gold:user_gold-amount)
+  target.update(gold:target_gold+amount)
+  flash[:notice]="#{amount} gold sent to #{target.name}"
+  redirect '/transfer'
 end
 
 get '/logout' do
