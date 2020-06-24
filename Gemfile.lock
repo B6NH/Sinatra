@@ -3,11 +3,11 @@ GEM
   specs:
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    backports (3.15.0)
+    backports (3.18.1)
     bcrypt (3.1.13)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
-    concurrent-ruby (1.1.5)
+    concurrent-ruby (1.1.6)
     data_mapper (1.2.0)
       dm-aggregates (~> 1.2.0)
       dm-constraints (~> 1.2.0)
@@ -56,37 +56,39 @@ GEM
       dm-core (~> 1.2.0)
     do_sqlite3 (0.10.17)
       data_objects (= 0.10.17)
-    faker (2.6.0)
-      i18n (>= 1.6, < 1.8)
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
     fastercsv (1.5.5)
-    i18n (1.7.0)
+    i18n (1.8.3)
       concurrent-ruby (~> 1.0)
     json (1.8.6)
     json_pure (1.8.6)
     multi_json (1.14.1)
-    mustermann (1.0.3)
-    public_suffix (4.0.1)
-    rack (2.0.7)
-    rack-protection (2.0.7)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
+    public_suffix (4.0.5)
+    rack (2.2.3)
+    rack-protection (2.0.8.1)
       rack
-    sinatra (2.0.7)
+    ruby2_keywords (0.0.2)
+    sinatra (2.0.8.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.7)
+      rack-protection (= 2.0.8.1)
       tilt (~> 2.0)
-    sinatra-contrib (2.0.7)
+    sinatra-contrib (2.0.8.1)
       backports (>= 2.8.2)
       multi_json
       mustermann (~> 1.0)
-      rack-protection (= 2.0.7)
-      sinatra (= 2.0.7)
+      rack-protection (= 2.0.8.1)
+      sinatra (= 2.0.8.1)
       tilt (~> 2.0)
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
     stringex (1.5.1)
     tilt (2.0.10)
     uuidtools (2.1.5)
-    will_paginate (3.2.1)
+    will_paginate (3.3.0)
 
 PLATFORMS
   ruby
@@ -102,4 +104,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.0.2
+   2.1.4
