@@ -13,6 +13,7 @@ Sinatra Application
   * Select sort order
   * Show number of posts and comments
   * Database is automatically seeded
+  * Filter posts by title
   
     
 * Users
@@ -30,4 +31,7 @@ Sinatra Application
   * Administrative user:
     * Login: Ewa
     * Password: ewa123
+    
+    
+* Settings
 
