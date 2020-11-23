@@ -14,24 +14,23 @@ Sinatra Application
   * Show number of posts and comments
   * Database is automatically seeded
   * Filter posts by title
-  
-    
+
+
 * Users
   * Login/register users
   * 2 types of users(normal, admin)
   * Admin users can delete posts and comments
   * Send gold to user
   * Show all users
-  
-  
+
+
 * Users credentials
   * Normal user:
-    * Login: Magda
-    * Password: magda123
+    * Login: John
+    * Password: john123
   * Administrative user:
-    * Login: Ewa
-    * Password: ewa123
-    
-    
-* Settings
+    * Login: Mark
+    * Password: mark123
 
+
+* Settings

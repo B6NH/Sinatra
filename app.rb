@@ -57,11 +57,11 @@ end
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-mpass = BCrypt::Password.create("magda123")
-epass = BCrypt::Password.create("ewa123")
+jpass = BCrypt::Password.create("john123")
+mpass = BCrypt::Password.create("mark123")
 
-User.create(name:"Magda",password:mpass)
-User.create(name:"Ewa",password:epass,admin:true)
+User.create(name:"John",password:jpass)
+User.create(name:"Mark",password:mpass,admin:true)
 
 Category.create(name:"games")
 Category.create(name:"movies")
