@@ -1,4 +1,4 @@
-# Portal
+# SinApp
 
 Sinatra Application
 
