@@ -58,7 +58,7 @@ GEM
     faker (2.15.1)
       i18n (>= 1.6, < 2)
     fastercsv (1.5.5)
-    i18n (1.8.7)
+    i18n (1.8.8)
       concurrent-ruby (~> 1.0)
     json (1.8.6)
     json_pure (1.8.6)
