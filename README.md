@@ -1,4 +1,4 @@
-# SinApp
+# Sinatra
 
 Sinatra Application
 
